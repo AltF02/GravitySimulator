@@ -15,7 +15,7 @@ collisions = True
 edge_clamp = True
 radius_scale = 2.0
 max_initial_speed = 100.0
-# The gravitational constant in this universe in pixels^3 kg^-1 s^-2.
+# The gravitational constant in this universe in pixels^3 kg^-1 s^-2.  The real one is 6.67384*(10^-11) m^3 kg^-1 s^-2
 G = 50000.0
 movement_substeps = 1
 target_fps = 60.0
@@ -31,10 +31,7 @@ if num_particles == -1:
 
 num_particles_orig = num_particles
 
-screen_size = [800, 600]
-icon = pygame.Surface((1, 1))
-icon.set_alpha(0)
-pygame.display.set_icon(icon)
+screen_size = [1000, 900]
 pygame.display.set_caption("Gravity Simulation")
 surface = pygame.display.set_mode(screen_size)
 
@@ -134,7 +131,7 @@ def get_input():
             if event.key == K_ESCAPE:
                 return False
             elif event.key == K_r:
-                setup_particles()  # reset
+                setup_particles()
     return True
 
 
@@ -157,17 +154,15 @@ def collision_detect():
             p1 = particles[i]
             p2 = particles[j]
             if Particle.get_collided(p1, p2):
-                # Remove colliding particles
                 dead_particles.append(p1)
                 dead_particles.append(p2)
-                # Replace with a single particle with their properties
                 mv_x = p1.mass * p1.vel[0] + p2.mass * p2.vel[0]
                 mv_y = p1.mass * p1.vel[1] + p2.mass * p2.vel[1]
                 mass = p1.mass + p2.mass
                 new_particles.append(Particle(
                     [(p1.pos[0] * p1.mass + p2.pos[0] * p2.mass) / mass,
-                     (p1.pos[1] * p1.mass + p2.pos[1] * p2.mass) / mass],  # center of mass
-                    [mv_x / mass, mv_y / mass],  # momentum is conserved but not kinetic energy
+                     (p1.pos[1] * p1.mass + p2.pos[1] * p2.mass) / mass],
+                    [mv_x / mass, mv_y / mass],
                     mass
                 ))
     if len(dead_particles) != 0:
