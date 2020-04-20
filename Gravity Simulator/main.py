@@ -15,7 +15,7 @@ collisions = True
 edge_clamp = True
 radius_scale = 2.0
 max_initial_speed = 100.0
-# The gravitational constant in this universe in pixels^3 kg^-1 s^-2.  The real one is 6.67384*(10^-11) m^3 kg^-1 s^-2
+# in sim = pixels^3 kg^-1 s^-2.  The real one is 6.67384*(10^-11) m^3 kg^-1 s^-2
 G = 50000.0
 movement_substeps = 1
 target_fps = 60.0
